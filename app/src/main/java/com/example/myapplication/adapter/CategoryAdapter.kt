@@ -3,6 +3,7 @@ package com.example.myapplication.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,13 @@ class CategoryAdapter(val itemList: ArrayList<Category>) : RecyclerView.Adapter<
         val image: ImageView
         init {
             image= itemView.findViewById(R.id.category_item_image)
+        }
+    }
+
+    class doIt(itemView: View){
+        val button: Button
+        init {
+            button= itemView.findViewById(R.id.addToCart)
         }
     }
 }

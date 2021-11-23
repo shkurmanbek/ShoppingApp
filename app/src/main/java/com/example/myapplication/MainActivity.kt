@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapter.CategoryAdapter
 import com.example.myapplication.model.Category
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -20,10 +21,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.nex3z.notificationbadge.NotificationBadge
 
 class MainActivity : AppCompatActivity() {
     var button: Button?= null
     var textView: TextView?= null
+    var addNumberToCart: Button?= null
     lateinit var preferences: SharedPreferences
     var isremembered = false
 
@@ -68,18 +71,33 @@ class MainActivity : AppCompatActivity() {
                 }
                 adapter.notifyDataSetChanged()
             }
-
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@MainActivity, "Error !", Toast.LENGTH_SHORT).show()
             }
         }
         db.child("category").addListenerForSingleValueEvent(valueEventListener)
+
+
+
+        val notificationBadge :NotificationBadge= findViewById(R.id.badge)
+        addNumberToCart?.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Okay!", Toast.LENGTH_SHORT).show()
+        }
+
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener() {
+            when(it.itemId){
+                R.id.navigation_home ->Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
+                R.id.navigation_cart -> Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
+                R.id.navigation_profile -> Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
     }
+
     fun setupRecyclerView(adapter: CategoryAdapter, recyclerView: RecyclerView){
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter =adapter
     }
-
-
-
 }

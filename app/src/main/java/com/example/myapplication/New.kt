@@ -13,7 +13,10 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.nex3z.notificationbadge.NotificationBadge
 import org.w3c.dom.Text
 
 class New : AppCompatActivity(){
@@ -47,7 +50,24 @@ class New : AppCompatActivity(){
         val headerView : View = navigationView.getHeaderView(0)
         val navUserName : TextView = headerView.findViewById(R.id.nav_user)
 
-
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener() {
+            when(it.itemId){
+                R.id.navigation_home -> {
+                    val intent = Intent(this@New, MainActivity::class.java)
+                    val editor: SharedPreferences.Editor=preferences.edit()
+                    editor.apply()
+                    startActivity(intent)
+                    finish()
+                    Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show()
+                }
+                R.id.navigation_cart -> Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
+                R.id.navigation_profile -> Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
+        val notificationBadge :NotificationBadge = findViewById(R.id.badge)
+        notificationBadge.setText("12",true)
 
         textPref=findViewById(R.id.textPref)
         buttonLogOut=findViewById(R.id.logout_btn)

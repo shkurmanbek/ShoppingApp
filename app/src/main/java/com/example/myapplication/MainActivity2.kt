@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity2: AppCompatActivity() {
     private lateinit var dbHelper: DBHelper
@@ -56,7 +57,7 @@ class MainActivity2: AppCompatActivity() {
         var total=""
 
         total = intent.extras?.getString("total").toString()
-        textView?.text=total.toString()
+        textView?.text=total
 
         saveButton?.setOnClickListener(){
             dbHelper.insertUserData(name?.text.toString(), email?.text.toString(), password?.text.toString())
